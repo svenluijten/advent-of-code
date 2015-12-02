@@ -29,7 +29,7 @@ foreach ($arrayInput as $value) {
     $surface = $extra * $height;
 
     // Total ribbon length.
-    $ribbon = $length + $length + $width + $width;
+    $ribbon = $length * 2 + $width * 2;
 
     // Total square feet package paper.
     $paper = (2 * $extra) + (2 * $width * $height) + (2 * $height * $length);
