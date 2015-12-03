@@ -5,35 +5,44 @@ $input = "v>v<vvv<<vv^v<v>vv>v<<<^^^^^<<^<vv>^>v^>^>^>^>^><vvvv<^>^<<^><<<^vvvv>
 $arrayInput = str_split($input);
 
 // Santa starts at 0, 0.
-$positions = [];
-$curX = 0;
-$curY = 0;
+$santaPos = $santa2Pos = $roboPos = [];
+$santaX = $santaY = $santa2X = $santa2Y = $roboX = $roboY = 0;
 
-foreach ($arrayInput as $key => $direction) {
+foreach ($arrayInput as $turn => $direction) {
     switch ($direction) {
         case '^':
             // Move north.
-            $curY++;
+            $turn % 2 == 0 ? $santaY++ : $roboY++;
+            $santa2Y++;
             break;
 
         case '>':
             // Move east.
-            $curX++;
+            $turn % 2 == 0 ? $santaX++ : $roboX++;
+            $santa2X++;
             break;
 
         case 'v':
             // Move south.
-            $curY--;
+            $turn % 2 == 0 ? $santaY-- : $roboY--;
+            $santa2Y--;
             break;
 
         case '<':
             // Move west.
-            $curX--;
+            $turn % 2 == 0 ? $santaX-- : $roboX--;
+            $santa2X--;
             break;
     }
 
-    $positions[] = $curX . "," . $curY;
+    $santaPos[]  = $santaX . "," . $santaY;
+    $roboPos[]   = $roboX . "," . $roboY;
+    $santa2Pos[] = $santa2X . "," . $santa2Y;
 }
 
-$count = array_count_values($positions);
-echo count($count);
+$santaVisited   = array_count_values($santaPos);
+$roboVisited    = array_count_values($roboPos);
+$totalTwoSantas = array_merge($santaVisited, $roboVisited);
+$totalOneSanta  = array_count_values($santa2Pos);
+
+echo "Part 1: " . count($totalOneSanta) . ". Part 2: " . count($totalTwoSantas);
