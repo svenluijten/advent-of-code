@@ -14,28 +14,26 @@ foreach ($arrayInput as $key => $direction) {
         case '^':
             // Move north.
             $curY++;
-            $positions[] = $curX . "," . $curY;
             break;
 
         case '>':
             // Move east.
             $curX++;
-            $positions[] = $curX . "," . $curY;
             break;
 
         case 'v':
             // Move south.
             $curY--;
-            $positions[] = $curX . "," . $curY;
             break;
 
         case '<':
             // Move west.
             $curX--;
-            $positions[] = $curX . "," . $curY;
             break;
     }
+
+    $positions[] = $curX . "," . $curY;
 }
 
 $count = array_count_values($positions);
-var_dump(count($count));
+echo count($count);
